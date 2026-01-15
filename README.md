@@ -40,7 +40,19 @@ Provides runnable code to support the Pact 5 minute getting started guide on our
   <img src="https://img.shields.io/badge/visit%20our-guide-blue?logo=react">
 </a>
 
+## Additional Examples
 
+This repository also includes examples for other use cases:
+
+### Argo Workflows Example
+
+The [`examples`](./examples) directory contains examples for submitting workflows to Argo Workflows via HTTP POST requests. This includes:
+
+- Complete documentation with curl, JavaScript, and Python examples
+- Executable Node.js and Python scripts
+- Sample workflow YAML definition
+
+See the [examples/README.md](./examples/README.md) for more details.
 
 ## An example scenario: Order API
 
