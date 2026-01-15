@@ -11,6 +11,16 @@ This directory contains examples for working with Argo Workflows, specifically d
 
 ## Quick Start
 
+### Prerequisites
+
+**For Node.js examples:**
+- Node.js installed
+- axios package (already available in the main project's package.json)
+
+**For Python examples:**
+- Python 3 installed
+- Install dependencies: `pip install -r examples/requirements.txt`
+
 ### Using Node.js
 
 ```bash

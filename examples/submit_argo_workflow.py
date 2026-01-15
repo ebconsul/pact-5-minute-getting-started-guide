@@ -24,8 +24,14 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Configuration
 ARGO_SERVER = os.environ.get('ARGO_SERVER', 'https://localhost:2746')
-ARGO_TOKEN = os.environ.get('ARGO_TOKEN', 'YOUR_TOKEN_HERE')
+ARGO_TOKEN = os.environ.get('ARGO_TOKEN')
 ARGO_NAMESPACE = os.environ.get('ARGO_NAMESPACE', 'default')
+
+# Validate required environment variables
+if not ARGO_TOKEN or ARGO_TOKEN == 'YOUR_TOKEN_HERE':
+    print('Error: ARGO_TOKEN environment variable is required.', file=sys.stderr)
+    print('Usage: ARGO_TOKEN=your_token python examples/submit_argo_workflow.py', file=sys.stderr)
+    sys.exit(1)
 
 # The workflow definition to submit
 workflow = {

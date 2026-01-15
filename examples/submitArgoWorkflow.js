@@ -17,8 +17,15 @@ const https = require('https');
 
 // Configuration
 const ARGO_SERVER = process.env.ARGO_SERVER || 'https://localhost:2746';
-const ARGO_TOKEN = process.env.ARGO_TOKEN || 'YOUR_TOKEN_HERE';
+const ARGO_TOKEN = process.env.ARGO_TOKEN;
 const ARGO_NAMESPACE = process.env.ARGO_NAMESPACE || 'default';
+
+// Validate required environment variables
+if (!ARGO_TOKEN || ARGO_TOKEN === 'YOUR_TOKEN_HERE') {
+  console.error('Error: ARGO_TOKEN environment variable is required.');
+  console.error('Usage: ARGO_TOKEN=your_token node examples/submitArgoWorkflow.js');
+  process.exit(1);
+}
 
 // The workflow definition to submit
 const workflow = {
