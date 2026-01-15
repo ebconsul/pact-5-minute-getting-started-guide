@@ -19,6 +19,8 @@ import json
 import requests
 
 # Disable SSL warnings for self-signed certificates
+# WARNING: This is insecure and should only be used in development
+# In production, use proper SSL certificates and remove this configuration
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 

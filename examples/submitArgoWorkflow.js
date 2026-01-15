@@ -52,7 +52,8 @@ const workflow = {
 };
 
 // Create an HTTPS agent that ignores certificate validation
-// Note: In production, you should use proper SSL certificates
+// WARNING: This is insecure and should only be used in development
+// In production, use proper SSL certificates and remove this configuration
 const agent = new https.Agent({
   rejectUnauthorized: false
 });
