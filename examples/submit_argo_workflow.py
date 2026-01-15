@@ -9,8 +9,9 @@ Usage:
 
 Environment Variables:
     ARGO_SERVER - Argo Workflows server URL (default: https://localhost:2746)
-    ARGO_TOKEN - Bearer token for authentication
+    ARGO_TOKEN - Bearer token for authentication (required)
     ARGO_NAMESPACE - Kubernetes namespace (default: default)
+    ARGO_INSECURE_SKIP_TLS_VERIFY - Skip TLS certificate verification (default: true, set to 'false' for production)
 """
 
 import os
@@ -28,6 +29,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 ARGO_SERVER = os.environ.get('ARGO_SERVER', 'https://localhost:2746')
 ARGO_TOKEN = os.environ.get('ARGO_TOKEN')
 ARGO_NAMESPACE = os.environ.get('ARGO_NAMESPACE', 'default')
+ARGO_INSECURE_SKIP_TLS_VERIFY = os.environ.get('ARGO_INSECURE_SKIP_TLS_VERIFY', 'true').lower() != 'false'
 
 # Validate required environment variables
 if not ARGO_TOKEN or ARGO_TOKEN == 'YOUR_TOKEN_HERE':
@@ -79,7 +81,7 @@ def submit_workflow():
                 'Content-Type': 'application/json',
                 'Authorization': f'Bearer {ARGO_TOKEN}'
             },
-            verify=False  # Skip SSL certificate verification
+            verify=not ARGO_INSECURE_SKIP_TLS_VERIFY  # Skip SSL certificate verification only if configured
         )
         
         response.raise_for_status()

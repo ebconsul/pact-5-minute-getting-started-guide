@@ -28,6 +28,8 @@ This directory contains examples for working with Argo Workflows, specifically d
 export ARGO_SERVER=https://localhost:2746
 export ARGO_TOKEN=your_token_here
 export ARGO_NAMESPACE=default
+# For production with valid SSL certificates, set:
+# export ARGO_INSECURE_SKIP_TLS_VERIFY=false
 
 # Run the example
 node examples/submitArgoWorkflow.js
@@ -40,6 +42,8 @@ node examples/submitArgoWorkflow.js
 export ARGO_SERVER=https://localhost:2746
 export ARGO_TOKEN=your_token_here
 export ARGO_NAMESPACE=default
+# For production with valid SSL certificates, set:
+# export ARGO_INSECURE_SKIP_TLS_VERIFY=false
 
 # Run the example
 python examples/submit_argo_workflow.py

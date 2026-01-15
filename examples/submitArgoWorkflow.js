@@ -8,8 +8,9 @@
  * 
  * Environment Variables:
  *   ARGO_SERVER - Argo Workflows server URL (default: https://localhost:2746)
- *   ARGO_TOKEN - Bearer token for authentication
+ *   ARGO_TOKEN - Bearer token for authentication (required)
  *   ARGO_NAMESPACE - Kubernetes namespace (default: default)
+ *   ARGO_INSECURE_SKIP_TLS_VERIFY - Skip TLS certificate verification (default: true, set to 'false' for production)
  */
 
 const axios = require('axios');
@@ -19,6 +20,7 @@ const https = require('https');
 const ARGO_SERVER = process.env.ARGO_SERVER || 'https://localhost:2746';
 const ARGO_TOKEN = process.env.ARGO_TOKEN;
 const ARGO_NAMESPACE = process.env.ARGO_NAMESPACE || 'default';
+const ARGO_INSECURE_SKIP_TLS_VERIFY = process.env.ARGO_INSECURE_SKIP_TLS_VERIFY !== 'false';
 
 // Validate required environment variables
 if (!ARGO_TOKEN || ARGO_TOKEN === 'YOUR_TOKEN_HERE') {
@@ -53,9 +55,9 @@ const workflow = {
 
 // Create an HTTPS agent that ignores certificate validation
 // WARNING: This is insecure and should only be used in development
-// In production, use proper SSL certificates and remove this configuration
+// In production, use proper SSL certificates and set ARGO_INSECURE_SKIP_TLS_VERIFY=false
 const agent = new https.Agent({
-  rejectUnauthorized: false
+  rejectUnauthorized: !ARGO_INSECURE_SKIP_TLS_VERIFY
 });
 
 /**
